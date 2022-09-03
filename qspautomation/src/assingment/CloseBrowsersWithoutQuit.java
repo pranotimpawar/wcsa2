@@ -1,0 +1,30 @@
+package assingment;
+
+import java.util.Set;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class CloseBrowsersWithoutQuit{
+	
+	public static void main(String[] args) throws InterruptedException {
+		
+		System.setProperty("webdriver.chrome.driver", "./drivers/chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://omayo.blogspot.com/");
+		Thread.sleep(3000);
+		driver.findElement(By.linkText("Open a popup window")).click();
+		Thread.sleep(3000);
+		Set<String> allhandles = driver.getWindowHandles();
+		
+		for(String a:allhandles)
+		{
+			driver.switchTo().window(a).close();
+			
+		}
+		
+	}
+
+}
